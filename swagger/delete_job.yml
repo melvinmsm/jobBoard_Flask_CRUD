@@ -1,0 +1,13 @@
+delete:
+  summary: Delete a job by ID
+  parameters:
+    - name: job_id
+      in: path
+      description: ID of the job to delete
+      required: true
+      type: integer
+  responses:
+    200:
+      description: Job deleted successfully
+    404:
+      description: Job not found

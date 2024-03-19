@@ -1,6 +1,5 @@
-# from flask import Flask, render_template, request, redirect, url_for
-from flask import Flask, render_template, jsonify, request, redirect, url_for
-from flasgger import Swagger
+from flask import Flask, render_template, jsonify, request
+from flasgger import Swagger, swag_from
 from db import mydb
 
 app = Flask(__name__)
@@ -13,6 +12,7 @@ def home():
 
  
 @app.route('/api/jobs', methods=['GET'])
+@swag_from('swagger/get_jobs.yml')
 def get_jobs():
     my_cur=mydb.cursor()
     my_cur.execute("SELECT * FROM JobBoard")
@@ -21,6 +21,7 @@ def get_jobs():
 
 
 @app.route('/api/jobs/<int:job_id>', methods=['GET'])
+@swag_from('swagger/get_job.yml')
 def get_job(job_id):
     my_cur=mydb.cursor()
     my_cur.execute("SELECT * FROM JobBoard WHERE jobID = %s", (job_id,))
@@ -33,6 +34,7 @@ def get_job(job_id):
 
 
 @app.route('/api/jobs', methods=['POST'])
+@swag_from('swagger/add_job.yml')
 def add_job():
     data = request.json
     jobId=data.get('jobId')
@@ -50,6 +52,7 @@ def add_job():
 
 
 @app.route('/api/jobs/<int:job_id>', methods=['PUT'])
+@swag_from('swagger/update_job.yml')
 def update_job(job_id):
     data = request.json
     jobName = data.get('jobName')
@@ -67,6 +70,7 @@ def update_job(job_id):
 
     
 @app.route('/api/jobs/<int:job_id>', methods=['DELETE'])
+@swag_from('swagger/delete_job.yml')
 def delete_job(job_id):
     my_cur = mydb.cursor()
     my_cur.execute("DELETE FROM JobBoard WHERE jobId = %s", (job_id,))

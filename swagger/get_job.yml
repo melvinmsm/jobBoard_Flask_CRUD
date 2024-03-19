@@ -1,0 +1,32 @@
+get:
+  summary: Get a specific job by ID
+  parameters:
+    - name: job_id
+      in: path
+      description: ID of the job to get
+      required: true
+      type: integer
+  responses:
+    200:
+      description: Details of the job
+      schema:
+        type: object
+        properties:
+          jobId:
+            type: integer
+            description: The unique identifier for the job
+          jobName:
+            type: string
+            description: The name of the job
+          jobDescription:
+            type: string
+            description: The description of the job
+          postingDate:
+            type: string
+            format: date
+            description: The date the job was posted
+          location:
+            type: string
+            description: The location of the job
+    404:
+      description: Job ID not found

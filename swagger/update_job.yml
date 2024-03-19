@@ -1,0 +1,39 @@
+put:
+  summary: Update an existing job
+  consumes:
+    - application/json
+  parameters:
+    - name: job_id
+      in: path
+      description: ID of the job to update
+      required: true
+      type: integer
+    - in: body
+      name: job
+      description: The updated job details
+      schema:
+        type: object
+        required:
+          - jobName
+          - jobDescription
+          - postingDate
+          - location
+        properties:
+          jobName:
+            type: string
+            description: The name of the job
+          jobDescription:
+            type: string
+            description: The description of the job
+          postingDate:
+            type: string
+            format: date
+            description: The date the job was posted
+          location:
+            type: string
+            description: The location of the job
+  responses:
+    200:
+      description: Job updated successfully
+    400:
+      description: Missing required fields

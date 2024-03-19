@@ -1,0 +1,26 @@
+get:
+  summary: Get all jobs
+  responses:
+    200:
+      description: A list of all jobs
+      schema:
+        type: array
+        items:
+          type: object
+          properties:
+            jobId:
+              type: integer
+              description: The unique identifier for the job
+            jobName:
+              type: string
+              description: The name of the job
+            jobDescription:
+              type: string
+              description: The description of the job
+            postingDate:
+              type: string
+              format: date
+              description: The date the job was posted
+            location:
+              type: string
+              description: The location of the job
